@@ -32,7 +32,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return;
       }
 
-      fetch("http://127.0.0.1:5000/generate", {
+      fetch("https://altossa-ppt-extension.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(images)
@@ -72,3 +72,4 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // Needed to keep message port open
   }
 });
+
