@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Add Image to PPT",
+  "version": "1.0",
+  "permissions": ["contextMenus", "activeTab", "scripting", "storage", "downloads"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "host_permissions": ["<all_urls>"]
+}
