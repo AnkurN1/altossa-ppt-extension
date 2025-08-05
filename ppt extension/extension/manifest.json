@@ -1,13 +1,20 @@
 {
   "manifest_version": 3,
-  "name": "Add Image to PPT",
+  "name": "Altossa PPT Extension",
   "version": "1.0",
-  "permissions": ["contextMenus", "activeTab", "scripting", "storage", "downloads"],
+  "permissions": [
+    "storage",
+    "downloads",
+    "contextMenus",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://https://altossa-ppt-extension.onrender.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
     "default_popup": "popup.html"
-  },
-  "host_permissions": ["<all_urls>"]
+  }
 }
