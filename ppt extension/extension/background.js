@@ -58,14 +58,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           };
 
           reader.onerror = (err) => {
-            console.error("❌ Fetch failed. Details:", JSON.stringify(err, Object.getOwnPropertyNames(err)));
+            console.error("Fetch failed. Details:", JSON.stringify(err, Object.getOwnPropertyNames(err)));
             sendResponse({ success: false });
           };
 
           reader.readAsDataURL(blob);
         })
         .catch((err) => {
-          console.error("Fetch failed:", err);
+          console.error("Fetch failed. Details:", JSON.stringify(err, Object.getOwnPropertyNames(err)));
           sendResponse({ success: false });
         });
     });
