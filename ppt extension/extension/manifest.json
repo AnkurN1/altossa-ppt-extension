@@ -9,7 +9,7 @@
     "activeTab"
   ],
   "host_permissions": [
-    "https://https://altossa-ppt-extension.onrender.com/*"
+    "https://https://altossa-ppt-extension.onrender.com/"
   ],
   "background": {
     "service_worker": "background.js"
@@ -18,3 +18,4 @@
     "default_popup": "popup.html"
   }
 }
+
