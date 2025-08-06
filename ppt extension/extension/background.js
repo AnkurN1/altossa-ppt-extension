@@ -58,7 +58,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           };
 
           reader.onerror = (err) => {
-            console.error("FileReader error:", err);
+            console.error("❌ Fetch failed. Details:", JSON.stringify(err, Object.getOwnPropertyNames(err)));
             sendResponse({ success: false });
           };
 
@@ -72,6 +72,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // Needed to keep message port open
   }
 });
+
 
 
 
