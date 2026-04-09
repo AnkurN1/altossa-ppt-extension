@@ -46,8 +46,35 @@ def generate_ppt(data):
             image.save(jpeg_stream, format="JPEG")
             jpeg_stream.seek(0)
 
-            # Insert product image
-            slide.shapes.add_picture(jpeg_stream, Inches(1), Inches(1), height=Inches(4.5))
+            # Define layout zone
+            top_title_space = Inches(0.7)
+            bottom_space = Inches(0.5)
+            
+            usable_width = prs.slide_width
+            usable_height = prs.slide_height - top_title_space - bottom_space
+            
+            # Get image size
+            img_width_px, img_height_px = image.size
+            
+            # Scale proportionally
+            width_ratio = usable_width / img_width_px
+            height_ratio = usable_height / img_height_px
+            scale_ratio = min(width_ratio, height_ratio)
+            
+            final_width = img_width_px * scale_ratio
+            final_height = img_height_px * scale_ratio
+            
+            # Left aligned, vertically centered
+            left = Inches(0)
+            top = top_title_space + (usable_height - final_height) / 2
+            
+            slide.shapes.add_picture(
+                jpeg_stream,
+                left,
+                top,
+                width=final_width,
+                height=final_height
+            )
 
             # Top-left: Product type label
             title_box = slide.shapes.add_textbox(Inches(0.3), Inches(0.15), Inches(5), Inches(0.8))
@@ -64,14 +91,6 @@ def generate_ppt(data):
             link_frame.paragraphs[0].font.size = Pt(10)
             link_frame.paragraphs[0].font.color.rgb = RGBColor(100, 100, 100)
 
-            # Bottom-right: Copyright
-            copyright_box = slide.shapes.add_textbox(Inches(10.2), Inches(7), Inches(4), Inches(0.5))
-            copyright_frame = copyright_box.text_frame
-            copyright_frame.text = "© 2025 Altossa Projects LLP. All Rights Reserved."
-            copyright_frame.paragraphs[0].font.size = Pt(10)
-            copyright_frame.paragraphs[0].font.color.rgb = RGBColor(100, 100, 100)
-            copyright_frame.word_wrap = True
-            copyright_frame.vertical_anchor = MSO_ANCHOR.BOTTOM
 
         except Exception as e:
             print("❌ Failed to process image:", img_url)
