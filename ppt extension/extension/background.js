@@ -32,7 +32,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return;
       }
 
-      fetch("https://altossa-ppt-extension.onrender.com/generate", {
+      fetch("https://altossa-ppt-extension-2ngy.onrender.com/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(images)
