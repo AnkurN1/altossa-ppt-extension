@@ -1,24 +1,21 @@
-from flask import Flask, request, send_file, jsonify
-from flask_cors import CORS
+from flask import Flask, request, send_file, jsonify, make_response
 from ppt_generator import generate_ppt
 
 app = Flask(__name__)
 
-# ✅ CORS AFTER app is created
-CORS(
-    app,
-    resources={r"/generate": {"origins": "*"}},
-    methods=["POST", "OPTIONS"],
-    allow_headers=["Content-Type"]
-)
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+    return response
 
 @app.route("/generate", methods=["POST", "OPTIONS"])
 def generate():
-    # Handle preflight request
     if request.method == "OPTIONS":
-        return jsonify({"ok": True}), 200
+        return make_response("", 204)
 
-    data = request.get_json()
+    data = request.get_json(silent=True) or []
     pptx_file = generate_ppt(data)
 
     return send_file(
