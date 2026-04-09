@@ -65,7 +65,7 @@ def generate_ppt(data):
             final_height = img_height_px * scale_ratio
             
             # Left aligned, vertically centered
-            left = Inches(0)
+            left = Inches(0.2)
             top = top_title_space + (usable_height - final_height) / 2
             
             slide.shapes.add_picture(
